@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>课程复习</title>
+  <link rel="stylesheet" href="styles.css?v=3">
+  <script defer src="data/questions.js"></script>
+  <script defer src="grading.js"></script>
+  <script defer src="app.js?v=3"></script>
+</head>
+<body>
+  <header class="top">
+    <div class="top-inner">
+      <span class="brand"><span class="brand-icon" aria-hidden="true">习</span> 课程复习</span>
+      <div class="backup" aria-label="学习记录">
+        <button id="export" class="quiet">导出 JSON</button>
+        <button id="import" class="quiet">导入 JSON</button>
+        <input id="import-file" type="file" accept=".json,application/json" hidden>
+      </div>
+    </div>
+  </header>
+  <div class="shell">
+    <div class="notice" id="notice" role="status" hidden></div>
+    <section class="overview" aria-labelledby="course-title">
+      <div>
+        <h1 id="course-title">课程复习</h1>
+        <div class="course-switch" role="group" aria-label="选择课程">
+          <button data-course="dance" aria-pressed="true">舞蹈</button>
+          <button data-course="ai" aria-pressed="false">人工智能与创业智慧</button>
+        </div>
+      </div>
+      <dl class="stats">
+        <div><dt>题库</dt><dd id="total">—</dd></div>
+        <div><dt>已答</dt><dd id="attempted">—</dd></div>
+        <div><dt>错题</dt><dd id="wrong-count">—</dd></div>
+        <div><dt>收藏</dt><dd id="favorite-count">—</dd></div>
+      </dl>
+    </section>
+    <div class="layout">
+      <aside class="side">
+        <nav aria-label="复习模式">
+          <button data-mode="browse" aria-current="page">题库浏览</button>
+          <button data-mode="ordered">顺序练习</button>
+          <button data-mode="random">随机练习</button>
+          <button data-mode="wrong">错题本</button>
+          <button data-mode="favorite">收藏</button>
+        </nav>
+        <p class="local-note" id="local-note">记录保存在当前浏览器。清理浏览器数据会丢失记录，可先导出 JSON 备份。</p>
+      </aside>
+      <main id="main">
+        <div class="section-head">
+          <h2 id="mode-title" tabindex="-1">题库浏览</h2>
+          <div id="result-count" role="status"></div>
+        </div>
+        <div class="filters" role="group" aria-label="筛选题目">
+          <label>关键词<input id="keyword" type="search" placeholder="搜索题干、选项或题号" autocomplete="off"></label>
+          <label>模块<select id="module"><option value="">全部模块</option></select></label>
+          <label>题型<select id="type"><option value="">全部题型</option><option>单选题</option><option>多选题</option><option>判断题</option></select></label>
+        </div>
+        <p class="keys" id="keys" hidden>数字键或字母键选项 · Enter 提交 · → 下一题</p>
+        <div id="content"></div>
+      </main>
+    </div>
+  </div>
+  <noscript><p class="shell">请启用 JavaScript 后打开课程复习页面。</p></noscript>
+</body>
+</html>
